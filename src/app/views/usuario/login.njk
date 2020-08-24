@@ -1,0 +1,32 @@
+{% include "_partials/head.njk" %}
+{# {% include "_partials/footer.njk" %} #}
+
+{# <body class="bg-dark"> #}
+<body class="bgLogin">
+  <div class="container">
+      <div class="card mx-auto login" style="bottom: 100px">
+          {# <div class="card-header">Login</div> #}
+          <div class="card-body">
+              <form  action="/usuario/validacao" method="POST">
+                  {% include "_partials/flash.njk" %}
+                  <div class="imgLogin">
+                    <img src="/assets/img/userLogin.png" width="90" height="90">
+                  </div>  
+                  <div class="form-group">
+                      <level for="email">Login ou E-mail</level>
+                      <input type="text" name="email" id="login" class="form-control" placeholder="Digite seu login ou e-mail">
+                  </div>
+                  <div class="form-group">
+                      <level for="senha">Senha</level>
+                      <input type="password" name="senha" id="senha" class="form-control" placeholder="Digite sua senha">
+                  </div>
+                  <button class="btn btn-primary btn-block btnEntrar">Entrar no Sistema</button>
+                  <div class="text-center">
+                      <a href="/usuario/cadastroLogin" class="d-block small mt-3 linkCriarConta">Criar uma conta</a>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</body>
+

@@ -1,0 +1,214 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+  <div class="row"> 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main"> 
+      <div class="cadastro">
+        <h3>Editar Imposto</h3>
+        <br>
+        
+        <form action="/imposto/editar/{{ imposto._id }}" method="POST">
+          {% include "_partials/flash.njk" %} 
+          {# <input type="hidden" name="_id"> #}
+          <div class="row">
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                  <label for="tipoImposto">Tipo de Imposto</label>
+                  <select name="tipoImposto" class="selectTiposImposto form-control">
+                  </select> 
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label for="usuario">Usuário</label>
+                <select name="usuario" class="form-control selectUsuarios">
+                </select> 
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label for="dataPgto">Data do Pagamento</label>
+                <input type="text" name="dataPgto" value='{{dataPgto}}' class="flatpickr form-control" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label for="valor">Valor</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">    
+                    <span class="input-group-text" id="input1">R$</span>
+                  </div>
+                  <input type="text" id="vl" class="form-control" name="valor" value='{{imposto.valor}}' data-thousands="." data-decimal=","  min="0.01" required/>
+                  {# <input type="number" name="valor" value='{{imposto.valor}}' step="0.01" id="vl" class="form-control" min="0.01" required> #}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label for="qtde">Quantidade</label>
+                <input type="number" name="qtde" value='{{imposto.qtde}}' id="qtde" class="form-control" min="1" max="100" required >
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label for="valorTotal">Valor Total</label>
+                  <div class="input-group">
+                  <div class="input-group-prepend">    
+                    <span class="input-group-text" id="input1">R$</span>
+                  </div>
+                  <input type="text" name="valorTotal" value='{{ imposto.valorTotal }}' id="vlTotal" class="form-control" readonly required>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary col-xl-2 col-lg-3 col-md-4 mt-2">Confirmar</button>
+          <a class="btn btn-primary btnVoltar col-xl-2 col-lg-3 col-md-4 mt-2" href="/imposto/listar" role="button">Voltar</a>
+        </form>
+      </div>
+    </main>
+  </div>       
+
+  <script>
+    (function(){
+      'use strict';
+      carregaItensImposto()
+      carregarUsuario()
+      casasDecimais()
+      flatpickr('.flatpickr', {
+        dateFormat: 'd/m/Y',
+      })
+
+      $(function () {
+        $('#vl').maskMoney();
+      })
+    })()
+
+    let $qtde = document.getElementById('qtde')
+    let $valor = document.getElementById('vl')
+
+    $valor.addEventListener('blur', calculaTotal)
+    $qtde.addEventListener('blur', calculaTotal)
+{# 
+    function calculaTotal(){
+      debugger
+      let $valorTotal = document.getElementById('vlTotal')
+      let valorTotal = 0;
+
+      valorTotal = $qtde.value * $valor.value
+
+      return $valorTotal.value = valorTotal.toFixed(2)
+    } #}
+
+    function calculaTotal() {
+      let $valorTotal = document.getElementById('vlTotal')
+      let valorTotal = 0;
+      let valorAux1;
+      let valorAux2;
+      let valorAux3;
+
+      valorAux1 = $valor.value;
+      valorAux2 = valorAux1.replace(/\./g, '');
+      valorAux3 = valorAux2.replace(/,/, '.');
+      valorTotal = $qtde.value * parseFloat(valorAux3);
+
+      return $valorTotal.value = valorTotal.toFixed(2);
+    }
+
+    function carregaItensImposto(){
+      let $select = document.getElementsByClassName('selectTiposImposto')
+      let tiposImpostoString = '{{itStr}}'
+      let tiposRemoveEspaco = tiposImpostoString.replace(/&quot/g, '')
+      let itensRemoveVirgula = tiposRemoveEspaco.replace(/;/g, '')
+      let regexId = new RegExp(/(:)(\w*)(,descricao)/g)
+
+      let imposto = '{{imposto.tipoImposto}}'
+      let regexNome = new RegExp(/(:?cricao:)(.{0,50})(:?,__)/g)
+
+      let idItem = []
+      let itemId = ''
+      let nomeItem = []
+      let itemNome = ''
+  
+      while(itemId = regexId.exec(itensRemoveVirgula)){
+        idItem.push(itemId[2])
+      }
+
+      while(itemNome = regexNome.exec(itensRemoveVirgula)){
+        nomeItem.push(itemNome[2])
+      }
+ 
+      for(let i=0; i< idItem.length ; i++){
+        let itemSelect = document.createElement("OPTION");
+
+        itemSelect.selected = false;
+        itemSelect.value = idItem[i];
+        itemSelect.text = nomeItem[i]; 
+
+        if(idItem[i] == imposto){
+          itemSelect.selected = true;
+        }
+
+        $select[0].appendChild(itemSelect);
+      }
+
+    }
+
+    function carregarUsuario(){
+      let $select = document.getElementsByClassName('selectUsuarios')
+      let usuariosString = '{{usuariosStr}}'
+      let usuariosRemoveEspaco = usuariosString.replace(/&quot/g, '')
+      let usuariosRemoveVirgula = usuariosRemoveEspaco.replace(/;/g, '')
+      let regexNome = new RegExp(/(:?nome:)(.{0,50})(:?,email)/g)
+      let regexId = new RegExp(/(:?_id:)(\w*)(:?,nome)/g)
+      let usuario = '{{imposto.usuario}}'
+
+      let idUsuario = []
+      let usuarioId = ''
+      let nomeUsuario = []
+      let usuarioNome = ''
+
+      while(usuarioId = regexId.exec(usuariosRemoveVirgula)){
+        idUsuario.push(usuarioId[2])
+      }
+
+      while(usuarioNome = regexNome.exec(usuariosRemoveVirgula)){
+        nomeUsuario.push(usuarioNome[2])
+      }
+
+      for(let i=0; i< idUsuario.length ; i++){
+        let itemSelect = document.createElement("OPTION");
+
+        itemSelect.selected = false;
+        itemSelect.value = idUsuario[i];
+        itemSelect.text = nomeUsuario[i]; 
+
+        if(idUsuario[i] == usuario){
+          itemSelect.selected = true;
+        }
+
+        $select[0].appendChild(itemSelect);
+      }
+
+    }
+
+    function casasDecimais() {
+      let $valor = document.getElementById('vl')
+      let valor = 'vl'
+      let $valorTotal = document.getElementById('vlTotal')
+      let valorTotal = 'vlTotal'
+
+      formataNumeros(valor, $valor)
+      formataNumeros(valorTotal, $valorTotal)
+
+      function formataNumeros(seletor, campo) {
+        let vetAux = [];
+        vetAux.push(parseFloat(campo.value).toFixed(2));
+        document.getElementById(seletor).value = vetAux[0].replace(/\./, ',');
+      }
+    }
+
+  </script>
+{% endblock%} 

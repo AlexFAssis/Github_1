@@ -1,0 +1,90 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+  <div class="row"> 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main"> 
+      <div class="listagem">
+        <a href="/imposto/cadastro">
+          <button class="btn btn-warning" id="btnNovo">
+            <i class="fas fa-plus-circle"></i>
+          </button>
+        </a>
+
+        <h3 id="TituloListagem">Listagem de Impostos</h3>
+        
+        {# <table id="example" class="table table-striped" style="width:100%">  #}
+        <table class="table table-striped" id="dataTable" width="100%">
+          <thead class="">
+            <tr>
+              <th scope="col" style="display:none">Id</th>
+              <th scope="col">Data do Pagamento</th>
+              <th scope="col">Imposto</th>
+              <th scope="col">Valor</th>
+              <th id="colEdit"></th>
+              <th id="colDelete"></th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for imposto in impostos%}
+              <tr id="{{imposto._id}}">
+                  <th scope="row" class="classId" style="display:none">{{imposto._id}}</th>
+                  {# <td class="dataFormatada">{{imposto.dataPgto}}</td> #}
+                  <th scope="row" class="tirarNegrito">{{ imposto.dataPgto | date("DD/MM/YYYY") }}</th>
+                  <th scope="row" class="tirarNegrito classDesc">{{imposto.tipoImposto.descricao}}</th>
+                  <td class="preco">R${{imposto.valorTotal}}</td>
+                  <td>
+                      <a href="editar/{{imposto._id}}">
+                          <button class="btn btn-primary">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                      </a>
+                  </td>
+                  <td>      
+                    <button type="button" class="btn btn-danger btnDelete" data-toggle="modal" data-target="#modalDelete" onClick="idLinha(this.parentNode.parentNode.id, 'imposto')">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>       
+                    {# <form action="/imposto/deletar/{{imposto._id}}" method="POST"> 
+                        <input type="hidden" name="_id" value="{{imposto._id}}">
+                        <button type="submit" class="btn btn-danger">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>  #}
+                  </td>  
+              </tr>
+            {% else %}
+              <th scope="row"></th>
+              <td></td>
+              <td></td>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div id="modalDelete" class="modal fade">
+          <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title">Atenção</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <p id="descTituloPopUp"> </p>       
+                  </div>
+                  <div class="modal-footer">
+                      <form action="" method="POST" class="formId" id="formId"> 
+                          <button type="submit" class="btn btn-danger">Sim</button>
+                      </form> 
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>    
+                  </div>
+              </div>
+          </div> 
+        </div>
+
+        <script src="/assets/js/functions/funcoesImposto.js"> </script>
+        <script src="/assets/js/functions/funcoesPopup.js"></script>
+
+      </div>
+    </main>
+  </div>     
+{% endblock%}

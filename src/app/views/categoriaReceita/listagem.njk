@@ -1,0 +1,87 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+    <div class="row"> 
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">  
+            <div class="listagem">
+                <a href="/categoriaReceita/cadastro">
+                    <button class="btn btn-warning" id="btnNovo">
+                        <i class="fas fa-plus-circle"></i>
+                    </button>
+                </a>
+
+                {% include "_partials/flash.njk" %}
+
+                <h3 id="TituloListagem">Listagem de Categoria de Receita</h3>
+
+                <table class="table table-striped" id="dataTable" width="100%">
+                    <thead class="">
+                    <tr>
+                        <th scope="col" style="display:none">Id</th>
+                        <th scope="col">Categoria</th>
+                        <th id="colEdit"></th>
+                        <th id="colDelete"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for categoriaReceita in categoriasReceita%}
+                        <tr class="itensReceita" id="{{categoriaReceita._id}}">
+                            <th scope="row" class="classId"  style="display:none">{{categoriaReceita._id}}</th>
+                            <th scope="row" class="tirarNegrito classDesc">{{categoriaReceita.categoria}}</th>
+                            <td >
+                                <a href="editar/{{categoriaReceita._id}}">
+                                    <button class="btn btn-primary btnEdit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </a>
+                            </td>
+                            <td>            
+                            {# <form action="/categoriaReceita/deletar/{{categoriaReceita._id}}" method="POST"> 
+                                <input type="hidden" name="_id" value="{{categoriaReceita._id}}">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form> #}
+                            
+                            <button type="button" class="btn btn-danger btnDelete" data-toggle="modal" data-target="#modalDelete" onClick="idLinha(this.parentNode.parentNode.id, 'categoria')">
+                                <i class="fas fa-trash-alt"></i>
+                            </button> 
+
+                            </td>
+                        </tr>
+                    {% else %}
+                        <th scope="row"></th>
+                        <td></td>
+                        <td></td>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div id="modalDelete" class="modal fade">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Atenção</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p id="descTituloPopUp"> </p>       
+                            </div>
+                            <div class="modal-footer">
+                                <form action="" method="POST" class="formId" id="formId"> 
+                                    <button type="submit" class="btn btn-danger">Sim</button>
+                                </form> 
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>    
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </main>
+    </div>         
+
+    <script src="/assets/js/functions/funcoesPopup.js"></script>
+    
+{% endblock%}

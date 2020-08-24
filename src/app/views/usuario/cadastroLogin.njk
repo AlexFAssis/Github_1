@@ -1,0 +1,83 @@
+{# {% extends "_layouts/default.njk" %}  #}
+{% include "_partials/head.njk" %}
+
+{% block body %}
+  <div class="cadastroLogin"> 
+    <section class="conteudo">
+      <h3>Cadastro de Usuário</h3>
+      {# <img src="/img/panqueca.jpg" class="img-fluid" alt="Responsive image">  #}
+      <br>
+      <form action="/usuarioLogin" method="POST">
+
+        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 loginFields">
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" placeholder="Nome" class="form-control" id="nomeUsuario" maxlength="50" required>
+          </div>
+        </div>
+
+        <div class="col-xl-10 col-lg-10  col-md-12 col-sm-12 col-12 loginFields">
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" placeholder="E-mail" class="form-control" maxlength="50" required>
+          </div>
+        </div>  
+
+        <div class="col-xl-10 col-lg-10 col-md-8 col-md-12 col-sm-12 col-12 loginFields">
+          <div class="form-group">
+            <label for="login">Login</label>
+            <input type="text" name="login" placeholder="Login" class="form-control" maxlength="50" required>
+          </div>
+        </div>
+
+        <div class="col-xl-10 col-lg-10 col-md-8 col-md-12 col-sm-12 col-12 loginFields">
+          <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" placeholder="Senha" class="form-control" maxlength="50" required>
+          </div>
+        </div>
+
+        <div class="col-xl-10 col-lg-10 col-md-8 col-md-12 col-sm-12 col-12 loginFields">
+          <div class="form-group">
+            <label for="senhaConfirmacao">Senha Confirmação</label>
+            <input type="password" name="senhaConfirmacao" placeholder="Confirmação de Senha" class="form-control" maxlength="50" required>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-xl-10 col-lg-10 col-md-8 col-md-12 col-sm-12 col-12 loginFields">
+            <div class="form-group">
+              {% include "_partials/flash.njk" %} 
+            </div>
+          </div>
+        </div>
+
+          {# <div class="col-xl-8 col-lg-8 col-md-8 col-md-12 col-sm-12 col-12 loginFields">
+            <div class="form-group"> #}
+              {# <button type="submit" class="btn btn-primary col-xl-12 col-lg-8 col-md-8">Criar</button> #}
+              <button type="submit" class="btn btn-primary col-xl-3 col-lg-4 col-md-4 col-sm-12 mt-2 btnCadastroLogin">Criar</button>
+            {# </div>
+          </div> #}
+              <a class="btn btn-primary col-xl-3 col-lg-4 col-md-4 col-sm-12 mt-2 btnCadastroLogin" href="/usuario/login" role="button">Voltar</a>
+              {# <button type="submit" class="btn btn-primary col-xl-3 col-lg-4 col-md-4 col-sm-12 mt-2  btnCadastroLogin">Voltar</button> #}
+
+
+          {# <button type="submit" class="btn btn-primary col-md-2 col-12">Criar</button> #}
+
+      </form>
+    {# </div> #}
+
+    </section>
+
+    <section class="apoio">
+      <img src="/assets/img/imgCadastro.jpg" class="img-fluid imgLogin" style="border-radius:10px; max-width:500px" alt="Responsive image"> 
+    </section>
+  </div>
+  {# <aside class"imgLogin"> #}
+    {# <img src="/img/panqueca.jpg" class="rounded float-left" alt="..."> #}
+    {# <img src="/img/panqueca.jpg" class="rounded float-right" alt="..."> #}
+    {# <img src="/img/panqueca.jpg" class="img-fluid" alt="Responsive image"> #}
+  {# </aside> #}
+
+  <script src="/assets/js/functions/funcoesUsuario.js">
+{% endblock%}

@@ -1,0 +1,53 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+  <div class="row"> 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main"> 
+      <div class="cadastro">
+        <h3>Editar Insumo</h3>
+        <br>
+        <form action="/insumo/editar/{{ insumo._id }}" method="POST">
+          <div class="row">
+            <div class="col-sm-12 col-md-10 col-lg-6 col-xl-6">
+              <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" value="{{ insumo.nome }}" class="form-control" maxlength="50" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">  
+            <div class="col-sm-4 col-md-4 col-lg-3 editInsumo">
+              <div class="form-group">
+                <label for="qtdeEstoque">Quantidade em Estoque</label>
+                <input type="text" name="qtdeEstoque" value="{{insumo.qtdeEstoque }}" class="form-control" readOnly required>
+              </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-3 editInsumo">
+              <div class="form-group">
+                <label for="valorEstoque">Valor Estoque</label>
+                <input type="text" name="valorEstoque" value="{{ valorEstoque }}" class="form-control" readOnly required>
+              </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-3">
+              <div class="form-group">
+                <label for="precoMedio">Preço Médio (mL, Grama ou Unidade)</label>
+                <input type="text" name="precoMedio" value="{{precoMedio }}" class="form-control" readOnly required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-8 col-md-8 col-lg-6 col-xl-4">
+              <div class="form-group">
+              {% include "_partials/flash.njk" %} 
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn btn-primary col-xl-2 col-lg-3 col-md-4 mt-2">Confirmar</button>
+          <a class="btn btn-primary btnVoltar btn btn-primary col-xl-2 col-lg-3 col-md-4 mt-2 btnVoltar" href="/insumo/listar" role="button">Voltar</a>
+        </form>
+      </div>
+    </main>
+  </div>   
+{% endblock%} 

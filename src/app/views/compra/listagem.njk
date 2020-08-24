@@ -1,0 +1,115 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+  <div class="row"> 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">  
+        <div class="listagem">
+          <div class="scheduleFilter mt-2">
+            <form action="/compra/listar" method="POST">
+              <div class="form-row">
+                <div class="col-sm-12 col-md-4 col-lg-3 scheduleFlatpickr ">
+                    <label for="dtInicial">Data Inicial<label><br>
+                    <input type="text" class="flatpickr col-md-12 col-sm-12" value="{{ dataAtual }}" id="dtInicial" name="dtInicial" placeholder="Escolha uma data"> 
+                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-3 scheduleFlatpickr ">
+                    <label for="dtFinal">Data Final<label><br>
+                    <input type="text" class="flatpickr col-md-12 col-sm-12" value="{{ dataAtual }}" id="dtFinal" name="dtFinal" placeholder="Escolha uma data"> 
+                </div>
+
+                {# <div class="col-sm-12 col-md-4  d-flex align-items-center">
+                    <button type="submit" class="btn btn-danger btn-lg col-md-6 col-sm-12" >Filtrar</button>
+                </div> #}
+
+                <div class="col-md-2 col-lg-2 d-flex align-items-center">
+                    <button type="submit" class="btn col-sm-5 col-md-12 btn-danger" id="btnFiltroData">Filtrar</button>
+                </div>
+              </div>  
+            </form>    
+          </div> 
+
+          <a href="/compra/cadastro">
+            <button class="btn btn-warning" id="btnNovo">
+              <i class="fas fa-plus-circle"></i>
+                </button>
+          </a>
+
+          <h3 class="mt-2" id="TituloListagem">Listagem de Compras</h3>
+
+          {# <table id="example" class="table table-striped" style="width:100%"> #}
+          <table class="table table-striped" id="dataTable" width="100%">
+            <thead class="">
+              <tr>
+                <th scope="col" style="display:none">Id</th>
+                <th scope="col">Data</th>
+                <th scope="col">Local</th>
+                <th scope="col">Valor</th>
+                <th id="colEdit"></th>
+                <th id="colDelete"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for compra in compras%}
+                <tr id="{{compra._id}}">
+                  {# <th scope="row" class="dataFormatada tirarNegrito">{{compra.data}}</th> #}
+                  <th scope="row" class="classId"  style="display:none">{{compra._id}}</th>
+                  {# <th scope="row" data-sort='YYYYMMDD' class="tirarNegrito">{{compra.data | date("DD/MM/YYYY") }}</th> #}
+                  <th scope="row" class="tirarNegrito">{{compra.data | date("DD/MM/YYYY") }}</th>
+                  <td>{{compra.local}}</td>
+                  <td class="valorListagem classDesc" >R${{compra.valorTotal}}</td>
+                  <td>
+                    <a href="editar/{{compra._id}}">
+                      <button class="btn btn-primary">
+                        <i class="fas fa-edit">
+                      </i></button>
+                    </a>
+                  </td>
+                  <td>            
+                    {# <form action="/compra/deletar/{{compra._id}}" method="POST"> 
+                        <input type="hidden" name="_id" value="{{compra._id}}">
+                        <button type="submit" class="btn btn-danger">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>  #}
+                    <button type="button" class="btn btn-danger btnDelete" data-toggle="modal" data-target="#modalDelete" onClick="idLinha(this.parentNode.parentNode.id, 'compra')">
+                        <i class="fas fa-trash-alt"></i>
+                    </button> 
+                  </td>
+                </tr>
+              {% else %}
+                <th scope="row"></th>
+                <td></td>
+                <td></td>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <div id="modalDelete" class="modal fade">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Atenção</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="descTituloPopUp"> </p>       
+                    </div>
+                    <div class="modal-footer">
+                        <form action="" method="POST" class="formId" id="formId"> 
+                            <button type="submit" class="btn btn-danger">Sim</button>
+                        </form> 
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>    
+                    </div>
+                </div>
+            </div> 
+          </div>
+        </div>
+      </main>
+  </div> 
+
+  <script src="/assets/js/functions/funcoesCompra.js"></script>
+  <script src="/assets/js/functions/funcoesPopup.js"></script>
+
+{% endblock%}

@@ -1,0 +1,92 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+    <div class="row"> 
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">  
+            <div class="listagem">
+                <a href="/produto/cadastro">
+                    <button class="btn btn-warning" id="btnNovo">
+                        <i class="fas fa-plus-circle"></i>
+                    </button>
+                </a>
+
+                {% include "_partials/flash.njk" %}
+
+                <h3 id="TituloListagem">Listagem Produtos</h3>
+                <br>
+
+                {# <table id="example" class="table table-striped" style="width:100%"> #}
+                <table class="table table-striped" id="dataTable" width="100%">
+                    <thead class="">
+                    <tr>
+                        <th scope="col" style="display:none">Id</th>
+                        <th scope="col" style="width:80%">Produto</th>
+                        <th scope="col" style="width:10%">Preço</th>
+                        <th id="colEdit"></th>
+                        <th id="colDelete"></th>
+                        {# <th scope="col"></th>
+                        <th scope="col"></th> #}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for produto in produtos%}
+                        <tr id="{{produto._id}}">
+                            <th scope="row" class="classId"  style="display:none">{{produto._id}}</th>
+                            <th scope="row" class="tirarNegrito classDesc">{{produto.receita.nome}}</th>
+                            <td class="preco">R${{produto.preco}}</td>
+                            <td style="display:flex">
+                                <a href="editar/{{produto._id}}">
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </a>
+                            </td>
+                            <td>  
+                                <button type="button" class="btn btn-danger btnDelete" data-toggle="modal" data-target="#modalDelete" onClick="idLinha(this.parentNode.parentNode.id, 'produto')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>   
+                                {# <form action="/produto/deletar/{{produto._id}}" method="POST" class='ml-2'> 
+                                    <input type="hidden" name="_id" value="{{produto._id}}">
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>   #}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <th scope="row"></th>
+                        <td></td>
+                        <td></td>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div id="modalDelete" class="modal fade">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Atenção</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p id="descTituloPopUp"> </p>       
+                            </div>
+                            <div class="modal-footer">
+                                <form action="" method="POST" class="formId" id="formId"> 
+                                    <button type="submit" class="btn btn-danger">Sim</button>
+                                </form> 
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>    
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </main>
+    </div> 
+
+    <script src="/assets/js/functions/funcoesProduto.js"></script>
+    <script src="/assets/js/functions/funcoesPopup.js"></script>
+    
+{% endblock%}

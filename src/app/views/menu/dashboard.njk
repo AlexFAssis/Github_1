@@ -1,0 +1,150 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+{# <div class="container">  #}  
+  <div class="dashboard">
+    <div class="row"> 
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">    
+        <div class="scheduleFilterDashboard mt-2">
+          <form action="/app/dashboard" method="POST">
+            <div class="form-row">
+              <div class="col-md-3 col-sm-4 scheduleFlatpickr ">
+                  <label for="dtInicial">Data Inicial<label><br>
+                  <input type="text" class="flatpickr col-md-12 col-sm-12" value="{{ dataInicial }}" id="dtInicialDashboard" name="dataInicial"> 
+              </div>
+              <div class="col-md-3 col-sm-4 scheduleFlatpickr ">
+                  <label for="dtFinal">Data Final<label><br>
+                  <input type="text" class="flatpickr col-md-12 col-sm-12" value="{{ dataFinal }}" id="dtFinalDashboard" name="dataFinal"> 
+              </div>
+              {# <div class="col-md-3 col-sm-4 d-flex align-items-center" id="btnFiltro"> #}
+              <div class="col-md-2 col-lg-2 d-flex align-items-center" id="btnFiltro">
+                  {# <button type="submit" class="btn btn-danger btn-lg col-md-6 col-sm-12" id="btnFiltroDashboard">Filtrar</button> #}
+                  <button type="submit" class="btn col-sm-5 col-md-12 btn-danger" id="btnFiltroData">Filtrar</button>
+              </div>
+            </div>  
+          </form>    
+        </div> 
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          {# <h2 class="h2" style="font-weight: bold;">Dashboard</h2> #}
+          <h2 class="h2" style="font-weight: bold;">Bem-Vindo: {{usuarioNome}}</h2>
+          <div class="btn-toolbar mb-2 mb-md-0">
+          </div>
+        </div>
+
+        <div class="row CardsDashboad">
+          <div class="col-xl-3 col-md-6">
+              <div class="card  text-white mb-4">
+                  <div class="card-body bgCardHeader" id="CardHeader1Dashboard">Despesas/Impostos:</div>
+                  <div id="Card1Dashboard"  class="card-footer d-flex align-items-center justify-content-between bgCards">
+                      <div class="small text-white" id="ValueCard1DashBoard"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+              <div class="card text-white mb-4">
+                  <div class="card-body bgCardHeader" id="CardHeader2Dashboard">Compras: </div>
+                  <div id="Card2Dashboard" class="card-footer d-flex align-items-center justify-content-between bgCards">
+                    <div class="small text-white" id="ValueCard2DashBoard"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+              <div class="card text-white mb-4">
+                  <div class="card-body bgCardHeader" id="CardHeader3Dashboard">Vendas:</div>
+                  <div id="Card3Dashboard" class="card-footer d-flex align-items-center justify-content-between bgCards">
+                    <div class="small text-white" id="ValueCard3DashBoard"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+              <div class="card text-white mb-4">
+                  <div class="card-body bgCardHeader" id="CardHeader4Dashboard">Produto mais vendido:</div>
+                  <div id="Card4Dashboard" class="card-footer d-flex align-items-center justify-content-between bgCards">
+                    <div class="small text-white" id="ValueCard4DashBoard"></div>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-6">
+              <div class="card mb-4">
+                  <div class="card-header"><i class="fas fa-chart-mr-1"></i>Gráfico de Imposto/Despesa</div>
+                  <div class="card-body"><canvas id="myChart1" width="100%" height="40"></canvas></div>
+              </div>
+          </div>
+          <div class="col-xl-6">
+              <div class="card mb-4">
+                  <div class="card-header"><i class="fas fa-chart-line mr-1"></i>Gráfico de Vendas</div>
+                  <div class="card-body"><canvas id="myChart2" width="100%" height="40"></canvas></div>
+              </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-6">
+              <div class="card mb-4">
+                  <div class="card-header"><i <i class="fas fa-chart-line mr-1"></i>Gráfico de Compras</div>
+                  <div class="card-body"><canvas id="myChart3" width="100%" height="40"></canvas></div>
+              </div>
+          </div>
+          <div class="col-xl-6">
+              <div class="card mb-4">
+                  <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>Produtos mais vendidos</div>
+                  <div class="card-body"><canvas id="myChart4" width="100%" height="40"></canvas></div>
+              </div>
+          </div>
+        </div>  
+
+        {# Imposto Hidden #}
+        <div class="Hidden">
+          {% for imposto in impostos%}
+            <input type="text" class="id_Imposto" name="_id" value="{{imposto._id}}">
+            <input type="text" class="dataPgto_Imposto" name="dataPgto" value="{{imposto.dataPgto}}">
+            <input type="number" class="total_Imposto" name="total" value="{{imposto.total}}">
+          {% endfor %}
+
+          {% for venda in vendas%}
+            <input type="text" class="id_Venda" name="_id" value="{{venda._idVenda}}">
+            <input type="text" class="data_Venda" name="data" value="{{venda.data}}">
+            <input type="number" class="total_Venda" name="totalVenda" value="{{venda.totalVenda}}">
+          {% endfor %}
+
+          {% for compra in compras%}
+            <input type="text" class="id_Compra" name="_id" value="{{compra._idVenda}}">
+            <input type="text" class="data_Compra" name="data" value="{{compra.data}}">
+            <input type="number" class="total_Compra" name="totalCompra" value="{{compra.totalCompra}}">
+          {% endfor %}
+
+          {# {% for receitas in receita%}
+            <input type="text" class="id_Receita" name="_idReceita" value="{{receita._id}}">
+          {% endfor %} #}
+
+          <p class="receitas"> {{ receitas }}</p>
+        </div>
+
+      </main>
+    </div> 
+  <div>  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script src="/assets/js/functions/funcoesDashboard.js"> </script> 
+  <script> 
+    flatpickr('.flatpickr', {
+      dateFormat: 'd/m/Y',
+      locale: {
+        // firstDayOfWeek: 1,
+        weekdays: {
+          shorthand: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+          longhand: ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'],
+        },
+        months: {
+          shorthand: ['Jan', 'Fev', 'Mar', 'Ab', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+          longhand: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        },
+      },
+    })
+  </script> 
+{% endblock%}
+

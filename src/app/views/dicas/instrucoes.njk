@@ -1,0 +1,267 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+  <div class="row"> 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">  
+      <div class="dicas">
+        <div id="accordion">
+          <div class="card">
+            <div class="card-header headerInstrucoes" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link btnDicas" data-toggle="collapse" data-target="#collapseOne">
+                  O que é o Economyc Kitchen
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+              <div class="card-body">
+                <p align="Justify" style="text-indent: 1.5em;">
+                  O Economyc Kitchen é um aplicativo que tem o intuito de ajudar proprietários de estabelecimentos alimentícios ou até mesmo quem pessoas que queiram saber o custo
+                de suas receitas. 
+      
+                </p>
+                <p align="Justify" style="text-indent: 1.5em;"> 
+                  Com ele é possível cadastrar compras de ingredientes, receitas, despesas, custos, produtos para venda e até mesmo registrar vendas. Além disso o sistema tem a opção
+                de mostrar o preço de cada receita, e também o preço de cada porção da receita, com o sem as despesas com impostos pagos e custos extras.  
+                </p>  
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header headerInstrucoes" id="headingTwo">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed btnDicas" data-toggle="collapse" data-target="#collapseTwo">
+                  Categoria de Receita
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p align="Justify" style="text-indent: 1.5em;">
+                  Essa opção é para que o usuário crie categorias para as suas receitas.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header headerInstrucoes" id="headingThree">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed btnDicas" data-toggle="collapse" data-target="#collapseThree">
+                  Tipo de Imposto/Despesa
+                </button>
+              </h5>
+            </div>
+            <div id="collapseThree" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p align="Justify" style="text-indent: 1.5em;">
+                    Essa opção é para que o usuário possa fazer um pré cadastro dos impostos e despesas que são pagos com frequência. Assim, quando for realizar 
+                  o pagamento só é necessário informar o valor a ser pago, e em alguns casos a quantidade de impostos ou despesas pagas.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header headerInstrucoes" id="headingFour">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed btnDicas" data-toggle="collapse" data-target="#collapseFour">
+                  Insumo
+                </button>
+              </h5>
+            </div>
+            <div id="collapseFour" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p align="Justify" style="text-indent: 1.5em;">
+                    A opção Insumo é para que sejam cadastrados os insumos adquiridos nas compras e que depois serão os ingredientes de cada receita. É 
+                  necessário que os insumos sejam cadastrados nessa opção previamente, só depois de cadastrados é possível cadastrar compras e receitas.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header headerInstrucoes" id="headingFive">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed btnDicas" data-toggle="collapse" data-target="#collapseFive">
+                  Compra
+                </button>
+              </h5>
+            </div>
+            <div id="collapseFive" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p align="Justify" style="text-indent: 1.5em;">
+                    Essa opção é onde serão cadastradas as compras realizadas pelo usuário, assim que cadastrada uma compra os itens do estoque de 
+                produtos é atualizado. 
+                </p>
+                <p align="Justify" style="text-indent: 1.5em;">
+                    Para checar a quantidade em estoque de cada item basta ir no menu de consulta de insumos e selecionar o insumo desejado. Nele é possível
+                ver a quantidade em estoque e o preço médio em estoque.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header headerInstrucoes" id="headingSix">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed btnDicas" data-toggle="collapse" data-target="#collapseSix">
+                  Imposto/Despesa
+                </button>
+              </h5>
+            </div>
+            <div id="collapseSix" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p align="Justify" style="text-indent: 1.5em;">
+                    É nessa opção que são cadastrados os impostos ou despesas pagas.
+                </p>
+                <p align="Justify" style="text-indent: 1.5em;">
+                    Após o cadastro é possível realizar o cálculo médio de cada receita com os impostos ou despesas pagas em um determinado período, 
+                para checar esse valor basta acessar a opção consultas no menu e depois selecionar Média de Preço Receitas. 
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header headerInstrucoes" id="headingSeven">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed btnDicas" data-toggle="collapse" data-target="#collapseSeven">
+                  {# Módulo Receita (Deixar Calcular uma vez por dia????) #}
+                  Receita
+                </button>
+              </h5>
+            </div>
+            <div id="collapseSeven" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p align="Justify" style="text-indent: 1.5em;">
+                    A opção de receita é onde é relizado o cadastro de cada receita, ingredientes usados, tempo de preparo e quantidade de rendimento. Após o cadastro de 
+                  uma receita é possível calcular o valor de cada receita e de cada porção manualmente, desde que haja em estoque todos os insumos que a receita possui.
+                </p>
+                <p align="Justify" style="text-indent: 1.5em;">
+                    Acessando o menu de consultas > receita e selecionar a receita desejada o sistema permite realizar esse cálculo. Além disso o sistema calcula automaticamente 
+                o valor de cada receita 1 vez por dia no primeiro login efetuado no sistema.
+                </p>
+                <p align="Justify" style="text-indent: 1.5em;">
+                    A cada cálculo realizado o sistema armazena um histórico do preço de cada receita, para visualizá-lo é só acessar o menu consulta > histórico de preços receita
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header headerInstrucoes" id="headingEight">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed btnDicas" data-toggle="collapse" data-target="#collapseEight">
+                  Produto {#(O que acontece se o preço do produto for alterado, o valor de uma venda anterior é atualizado???))#}
+                </button>
+              </h5>
+            </div>
+            <div id="collapseEight" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p align="Justify" style="text-indent: 1.5em;">
+                  Cada receita cadastrada pode se tornar um produto disponível para venda, nessa opção o usuário realiza o cadastro desse produto
+                selecionando uma receita e cadastrando-a como uma produto para venda. 
+                {# No momento da venda ao selecionar o produto o valor é carregado automaticamente. #}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header headerInstrucoes" id="headingNine">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed btnDicas" data-toggle="collapse" data-target="#collapseNine">
+                  Receita Por Dia
+                </button>
+              </h5>
+            </div>
+            <div id="collapseNine" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p align="Justify" style="text-indent: 1.5em;">
+                    Essa opção é onde o usuário vai informar a quantidade de cada receita feita em determinado dia, para um melhor controle.
+                </p>    
+                <p align="Justify" style="text-indent: 1.5em;">    
+                  Após ser feito o lançamento da quantidade e receitas feitas por dia o usuário pode informar no final do dia a quantidade de sobras de cada receita. Obs: A quantidade
+                de sobra deve ser cadastrada com base na quantidade de rendimento da receita, exemplo: Se determinada receita tem 10 porções de rendimento e foram feitas 2 receitas
+                a quantidade feita é de 20 unidades, então a sobra é a quantidade de rendimento em unidade.
+                {# Fazer validação de sobra maior que o a quantidade total feita #}
+                </p>
+                <p align="Justify" style="text-indent: 1.5em;">
+                  OBS: Assim que é cadastrado uma receita feita o estoque dos insumos é atualizado.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header headerInstrucoes" id="headingTen">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed btnDicas" data-toggle="collapse" data-target="#collapseTen">
+                  Venda
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTen" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p align="Justify" style="text-indent: 1.5em;">
+                  A opção de venda é onde o usuário realiza suas vendas, sendo possível selecionar a forma de pagamento, e até informar um possível desconto negociado com o cliente. 
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header headerInstrucoes" id="headingEleven">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed btnDicas" data-toggle="collapse" data-target="#collapseTen">
+                  Medidas utilizadas pelo sistema
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTen" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p align="Justify" style="text-indent: 1.5em;">
+                    O estoque de cada produto é mostrado conforme a medida de cada item registrado no momento da compra. O sistemas converte a quantidade comprada, mostrando
+                o estoque em unidades, gramas ou mL.
+                </p>
+                <p align="Justify" style="text-indent: 1.5em;">
+                    O sistema utliza algumas medidas para cada item da receita, os valores são valores aproximados, podendo variar, dependendo da massa de
+                  cada ingrediente.
+                </p>
+                <table class="table table-bordered mt-2">
+                  <thead>
+                    <tr>
+                      <th scope="col">Medida</th>
+                      <th scope="col">Valor em gramas/mL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Colher de Chá</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td>Colher de Sopa</td>
+                      <td>20</td>
+                    </tr>
+                    <tr>
+                      <td>Copo (Americano)</td>
+                      <td>250</td>
+                    </tr>
+                    <tr>
+                      <td>Xícara</td>
+                      <td>100</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>  
+{% endblock%} 
+

@@ -1,0 +1,131 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+  <div class="row"> 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">  
+      <div class="cadastro">
+        <h3>Cadastro de Receita</h3>
+        <br>
+        <form action="/receita" method="POST" enctype="multipart/form-data" id="formPost" name="myForm">
+          {# <input type="hidden" name="_id"> #}
+
+          {# <div class="row col-md-6 col-lg-6" id="error">
+            {% include "_partials/flash.njk" %}
+          </div>  #}
+
+          <div class="row">
+            <div class="col-md-8 col-lg-6">
+              <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nomeReceita" placeholder="Nome" class="form-control" maxlength="50" required>
+              </div>
+            </div>
+          </div> 
+          <div class="row">
+            <div class="col-md-6 col-lg-6">
+              <div class="form-group">
+                <label for="imgReceita">
+                  <img src="/assets/img/avatar.svg" height="24">
+                </label>
+                <input id="imgReceita" name="imgReceita" type="file">
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <a class="btn btn-primary col-xl-2 col-lg-3 col-md-4" href="#" role="button" id="btnAdicionar">Adicionar Ingrediente</a>
+          </div>
+          {# <br> #}
+
+          {# <div class="row mt-2" id="error" style="display:none">
+            <div class="col-md-6 col-lg-6">
+              <div class="alert alert-danger">Informe ingredientes para a receita</div>
+            </div>
+          </div> #}
+
+          <div id="itens"> 
+          </div> 
+
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="form-group">
+                <label for="modoPreparo">Modo de Preparo</label>
+                <textarea id="modoPreparo" name="modoPreparo" rows="20" cols="100" class="form-control" required></textarea>
+              </div>
+            </div>
+          </div> 
+
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="form-group">
+                <label for="obs">Obs:</label>
+                <textarea id="obs" name="obs" rows="10" cols="100" class="form-control"></textarea> 
+              </div>
+            </div>
+          </div> 
+
+          <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-3">
+              <div class="form-group">
+                <label for="qtdeRendimento">Quantidade de Porções</label>
+                <input type="number" name="qtdeRendimento" placeholder="Quantidade de Rendimento" step="0.01" class="form-control" min="0.01" max ="100" required>
+              </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3">
+              <div class="form-group">
+                <label for="tempoPreparo">Tempo de Preparo</label>
+                <input type="time" name="tempoPreparo" placeholder="Tempo de Preparo" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3">
+              <div class="form-group">
+                <label for="categoriaReceita">Categoria</label>
+                <select name="categoriaReceita" id="selectCategorias" class="form-control">
+                  {% for categoria in categoriasReceita %}
+                    <option value="{{ categoria._id }}" name="categoria">{{ categoria.categoria }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row col error">
+            <div class="alert alert-danger">É necessário adicionar um item para realizar a gravação</div>
+          </div> 
+
+          {# <button type="submit" class="btn btn-primary col-xl-1 col-lg-2 col-md-4" id="btnGravar" disabled>Criar</button> #}
+          <button type="submit" class="btn btn-primary col-xl-2 col-lg-3 col-md-4" id="btnGravar" disabled>Criar</button>
+          {# <button type="button" class="btn btn-primary col-xl-1 col-lg-2 col-md-4" id="btnValidacao">Criar</button> #}
+
+          <select class="hidden">
+            {% for insumo in insumos %}
+              <option value="{{ insumo._id }}" name="receita" class="itemInsumo"> {{ insumo.nome }}</option>
+            {% endfor %}
+          </select>
+
+          <select class="hidden" id="medidasHidden">
+            <option value="Colher Cha" class="qtdeInsumo">Colher de Chá</option>
+            <option value="Colher Sopa" class="qtdeInsumo">Colher de Sopa</option>
+            <option value="Copo" class="qtdeInsumo">Copo</option>
+            <option value="Duzia" class="qtdeInsumo">Dúzia(s)</option>
+            <option value="G" class="qtdeInsumo">Gramas</option>
+            <option value="KG" class="qtdeInsumo">KG</option>
+            <option value="L" class="qtdeInsumo">Litro(s)</option>
+            <option value="MG" class="qtdeInsumo">MG</option>
+            <option value="ML" class="qtdeInsumo">ML</option>
+            <option value="Unidade" class="qtdeInsumo">Unidade(s)</option>
+            <option value="Xicara" class="qtdeInsumo">Xícara(s)</option>
+          </select>
+        </form>
+      </div>
+    </main>
+  </div> 
+
+
+  <script src="/assets/js/functions/funcoesReceita.js"></script>
+
+{% endblock%}

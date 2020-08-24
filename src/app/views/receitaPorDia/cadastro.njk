@@ -1,0 +1,54 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+  <div class="row"> 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">  
+      <div class="cadastro">
+        <h3>Cadastro de Receita Por Dia</h3>
+        <br>
+        <form action="/receitaPorDia" method="POST">
+          {# {% include "_partials/flash.njk" %} #}
+          {# <input type="hidden" name="_id"> #}
+          <div class="row">
+            <div class="col-md-3 col-sm-4">
+              <div class="form-group">
+                <label for="data">Data</label>
+                <input type="text" name="data" id="dtCompra"  class="flatpickr form-control" value={{dataReceita}}> 
+              </div>
+            </div>
+          </div>
+
+          <div class="row" id="error">
+            <div class="col">
+              {% include "_partials/flash.njk" %}
+            </div>
+          </div> 
+          <div>
+            <a class="btn btn-primary mb-2 col-md-3 col-lg-3 col-xl-2" href="#" role="button" id="btnAdicionar">Adicionar Item</a>
+          </div>
+
+          <div id="itens"> 
+          </div>
+
+          <select class="hidden">
+            {% for produto in produtos %}
+              <option value="{{ produto.receita._id }}"  class="receitaItemHidden">{{ produto.receita.nome }}</option>
+            {% endfor %}
+          </select> 
+
+          {# Quando era listado a receita e não o produto #}
+          {# <select class="hidden">
+            {% for receita in receitas%}
+              <option value="{{ receita._id }}"  class="receitaItemHidden">{{ receita.nome }}</option>
+            {% endfor %}
+          </select>  #}
+          
+          <button type="submit" class="btn btn-primary mt-2 col-md-3 col-lg-3 col-xl-2">Criar</button>
+        </form>
+      </div>
+    </main>
+  </div> 
+  
+<script src="/assets/js/functions/funcoesReceitaPorDia.js"></script>
+
+{% endblock%}

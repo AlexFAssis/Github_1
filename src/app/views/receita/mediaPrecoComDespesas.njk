@@ -1,0 +1,48 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+  <div class="row"> 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">  
+        <div class="listagem">
+          <h3>Média de Preços de Receitas</h3>
+          <br>
+          <div class="row">
+            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+              <div class="form-group">
+                <label for="qtdeRendimento">Data Inicial</label>
+                <input type="text" name="dtInicial" placeholder="Data" class="flatpickr form-control" id="dtInicial" value="{{primeiroDia}}">
+              </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+              <div class="form-group">
+                <label for="tempoPreparo">Data Final</label>
+                <input type="text" name="dtFinal" placeholder="Data Final" class="flatpickr form-control" id="dtFinal" value="{{ultimoDia}}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-2 col-lg-2 col-md-4">
+              <div class="form-group">
+                <input type="submit" class="form-control btn btn-primary mt-2" id="btnBuscarValorFinal" value="Confirmar">
+              </div>
+            </div>
+          </div>
+          <table id="example" class="table table-striped" style="width:100%">        
+            <thead class="">
+              <tr>
+                <th scope="col">Receita</th>
+                <th scope="col">Preço Receita</th>
+                <th scope="col">Quantidade Rendimento</th>
+                <th scope="col">Preço Por Porção</th>
+              </tr>
+            </thead>
+            <tbody id="tb" >
+            
+            </tbody>
+          </table> 
+        </div>
+      </main>
+  </div> 
+<script src="/assets/js/functions/funcoesReceita.js"></script>
+
+{% endblock%}

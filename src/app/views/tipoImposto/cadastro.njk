@@ -1,0 +1,27 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+  <div class="row"> 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">  
+      <div class="cadastro">
+        <h3>Cadastro de Tipo de Imposto/Despesa</h3>
+        <br>
+        <form action="/tipoImposto" method="POST">
+          {# {% include "_partials/flash.njk" %} #}
+          {# <input type="hidden" name="_id"> #}
+          <div class="row">
+            <div class="col-md-8 col-lg-6">
+              <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <input type="text" name="descricao" placeholder="Descrição" class="form-control" maxlength="50" required>
+              </div>
+              {% include "_partials/flash.njk" %}
+            </div>
+          </div>
+  
+          <button type="submit" class="btn btn-primary col-xl-2 col-lg-3 col-md-4 mt-2">Criar</button>
+        </form>
+      </div>
+    </main>
+  </div>   
+{% endblock%}

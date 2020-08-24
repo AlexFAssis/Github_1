@@ -1,0 +1,138 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+    <p id="totalPaginasNavegacao" style="display:none">{{receitas.pages}} </p>
+    <p id="paginaAtual" style="display:none">{{receitas.page }} </p>
+    {# <p id="teste" style="background-color:red; float:right;"> </p> #}
+
+    <div class="row"> 
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">  
+            <div class="listagem">
+                <a href="/receita/cadastro">
+                    <button class="btn btn-warning" id="btnNovo">
+                        <i class="fas fa-plus-circle"></i>
+                    </button>
+                </a>
+
+                {% include "_partials/flash.njk" %}
+
+                <h3 id="TituloListagem">Listagem Receitas</h3>
+                <br>
+
+                {# <div class="row  row-cols-md-3 row-cols-xl-3 row-cols-sm-2">  #}
+
+                    {{ contador }}
+                        {% set contador = 0 %}
+
+                    {% for receita in receitas.docs %}
+
+                        {% if contador == 0 %}
+                            <div class="row ml-1">
+                        {% endif %}
+
+                        {# <div class="col col-sm-	col-md-	col-lg-	col-xl mb-4"> #}
+                        <div class="col-sm-8 col-md-6 col-lg-6 col-xl-3 mb-3">
+                        {# <div class="col"> #}
+                            <div class="card " id="{{receita._id}}">
+                                <img src="/files/{{receita.imgReceita}}" class="card-img-top receita" alt="..." >
+                                <div class="card-body receita">
+                                    <h5 class="classId"  style="display:none">{{receita._id}}</h5>
+                                    <h5 class="card-title classDesc">{{receita.nome}}</h5>
+                                    <form action="/receita/deletar/{{receita._id}}" method="POST" class="formReceita"> 
+                                        {# <a href="editar/{{receita._id}}"><button class="btn btn-success mt-1 mr-4">Editar Receita</button></a> #}
+                                        <a href="editar/{{receita._id}}">
+                                            <input type="button" class="btn btn-primary mt-1 mr-2" value="Editar">
+                                        </a>
+
+                                        <button type="button" class="btn btn-danger btnDelete mt-1 ml-2" data-toggle="modal" data-target="#modalDelete" onClick="idLinha(this.parentNode.parentNode.parentNode.id, 'receita')">
+                                            Deletar
+                                        </button> 
+                                    </form>
+                                    <div class="card-footer receita">
+                                        <small class="text-muted dataFormatada">{{ receita.criadaEm }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% set contador = contador + 1 %}
+                                    
+                        {% if contador == 4 %}
+                            {% set contador = 0 %}
+                            </div>
+                            
+                            <div class="row mt-2 mb-2">
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <h4 class="mt-3">Não há receitas para exibir</h4>
+                    {% endfor %}
+
+                    {% if contador != 4 %}
+                        </div>
+                    {% endif %}
+                {# </div> #}
+
+                <div class="row ml-1 mt-2 mb-2"> 
+                </div> 
+
+                <nav aria-label="Navegação de página">
+                    <ul class="pagination justify-content-end">                        
+                        {% if receitas.page > 1 %}
+                            <li class="page-item" id="page-preview">
+                        {% else %}    
+                            <li class="page-item disabled" id="page-preview">
+                        {% endif %}  
+                
+                            <a class="page-link" href="/receita/listar?page={{receitas.page  -  1}}" tabindex="">Anterior</a>
+                        </li>
+                        
+                        {% if receitas.page == 1 %}
+                            <li class="page-item active"><a class="page-link" id="nav-1" href="/receita/listar?page=1">1</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" id="nav-1" href="/receita/listar?page=1">1</a></li>
+                        {% endif %}    
+
+                        {% if receitas.page >= receitas.pages %}
+                            <li class="page-item disabled" id="page-next">
+                        {% else %}    
+                            <li class="page-item " id="page-next">
+                        {% endif %}  
+
+                            <a class="page-link" href="/receita/listar?page={{receitas.page | int +  "1" | int }} " tabindex="">Próximo</a>
+                        </li>
+                    </ul>
+                </nav> 
+
+                <br>
+                <br>    
+            </div>
+        </main>
+    </div>
+
+    <div id="modalDelete" class="modal fade">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Atenção</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="descTituloPopUp"> </p>       
+                </div>
+                <div class="modal-footer">
+                    <form action="" method="POST" class="formId" id="formId"> 
+                        <button type="submit" class="btn btn-danger">Sim</button>
+                    </form> 
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>    
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <script src="/assets/js/functions/funcoesPopup.js"></script>  
+    <script src="/assets/js/functions/funcoesReceita.js"></script>
+{% endblock%}
+

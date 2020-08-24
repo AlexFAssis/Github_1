@@ -1,0 +1,168 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+  <div class="row"> 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">  
+      <div class="cadastro">
+        <h3>Editar Receita Por Dia</h3>
+        <br>
+
+          <h3>Window size is <span class="window-size"></span></h3>
+          <p>Knowing this number you can make decisions based in breakpoints of window.</p>
+          <hr>
+          <h3>Screen size is <span class="screen-size"></span></h3>
+          <p>Here you have an idea of device screen size. </p>
+
+        <form action="/receitaPorDia/editar/{{ receitaPorDia._id }}" method="POST">
+          {# {% include "_partials/flash.njk" %} #}
+          {# <input type="hidden" name="_id"> #}
+          <div class="row">
+            <div class="col-sm-4 col-md-3 col-lg-3 col-xl-2">
+              <div class="form-group">
+                <label for="data">Data</label>
+                <input type="text" name="data" id="dtCompra"  class="flatpickr form-control" value="{{ dataReceita }}"> 
+              </div>
+            </div>
+          </div>
+
+          <div class="row" id="error">
+            <div class="col">
+              {% include "_partials/flash.njk" %}
+            </div>
+          </div> 
+
+          <div>
+            <a class="btn btn-primary mb-2 col-md-3 col-lg-3 col-xl-2" href="#" role="button" id="btnAdicionar">Adicionar Item</a>
+          </div>
+
+          <div id="itens">
+            {% for receitasPorDiaItens in receitasPorDiaItem %}
+                <div class="row">
+                    <div class="col-xl-1 col-lg-2 col-md-2">
+                      <label for="quantidade">Quantidade</label>
+                      <input type="number" step="0.01" name="quantidade" value="{{ receitasPorDiaItens.quantidade }}" class="qtde form-control" min="0.01" required>
+                    </div>
+                    <div class="col-xl-5 col-lg-4 col-md-4">
+                      <label for="receita">Receita</label>
+                      <select name="receita" class="Receita form-control">
+                      </select>
+                    </div>
+                    <div class="col-xl-1 col-lg-2 col-md-2 campoRend">
+                      <label for="rendimento">Rendimento</label>
+                      <input type="number" step="0.01" name="rendimento" class="rend form-control" readOnly>
+                    </div>
+                    <div class="col-xl-1 col-lg-2 col-md-2">
+                      <label for="sobra">Sobra</label>
+                      <input type="number" step="0.01" name="sobra" value="{{ receitasPorDiaItens.sobra }}" class="sobra form-control">
+                    </div> 
+                    <div class="col-md-2 divBtnExcluirReceitaPorDia">
+                      <input type="button" name="btnExcluir" value="X" class="btnExcluir btn btn-danger mt-4">
+                    </div>  
+                </div> 
+            {% else %}
+              <h4 class="mt-3">Não há itens para exibir nessa data</h4>
+            {% endfor %}
+          </div> 
+
+          <button type="submit" class="btn btn-primary mt-2 col-md-3 col-lg-3 col-xl-2">Confirmar</button>
+          <a class="btn btn-primary mt-2 col-md-3 col-lg-3 col-xl-2 btnVoltar" href="/receitaPorDia/listar" role="button">Voltar</a>
+
+          <select  class="hidden">
+            {% for produto in produtos %}
+              <option value="{{ produto.receita._id }}" class="receitaItemHidden"> {{ produto.receita.nome }}</option>
+            {% endfor %}
+          </select>
+
+          {% for produto in produtos %}
+              <input type="text" class="hidden receitaRendimento" value="{{ produto.receita.qtdeRendimento }}">
+          {% endfor %}
+
+          <select  class="hidden" id="receitasItem">
+            {% for IdReceitaPorDiaItem in vetIdReceitaPorDiaItens %}
+              <option value="{{IdReceitaPorDiaItem.id}}" >{{IdReceitaPorDiaItem.qtdeRendimento}}</option>
+            {% endfor %}
+          </select>
+
+          {# <select  class="hidden">
+            {% for receita in receitas %}
+              <option value="{{ receita._id }}" class="receitaItemHidden"> {{ receita.nome }}</option>
+            {% endfor %}
+          </select> #}
+
+          {# {% for receita in receitas %}
+              <input type="text" class="hidden receitaRendimento" value="{{ receita.qtdeRendimento }}">
+          {% endfor %} #}
+
+          {# <select  class="hidden" id="receitasItem">
+            {% for IdReceitaPorDiaItem in vetIdReceitaPorDiaItens %}
+              <option value="{{IdReceitaPorDiaItem.id}}" >{{IdReceitaPorDiaItem.qtdeRendimento}}</option>
+            {% endfor %}
+          </select> #}
+
+
+          <input type="number" value="{{ controle }}" id="controle" style="display:none;"> 
+
+        </form>
+      </div>
+    </main>
+  </div>   
+
+  <script src="/assets/js/functions/funcoesReceitaPorDia.js"></script>
+    {# (function(){ #}
+      {# 'use strict'; #}
+      {# window.addEventListener("load", function(event) {
+        ocultaReceitas()
+        carregaReceitas()
+      })  #}
+      
+      {# flatpickr('.flatpickr', {
+        dateFormat: 'd/m/Y',
+      }) #}
+
+      {# function ocultaReceitas(){
+        let $qtde = document.getElementsByClassName("hidden").length
+        for(let i=0; i < $qtde; i++){
+          document.getElementsByClassName("hidden")[i].style.display = "none";
+        }
+      }
+
+      function carregaReceitas(){
+        let $select = document.getElementsByClassName('selectReceitas')
+        let receitasString = '{{receitasStr}}'
+        let receitasSemEspaco = receitasString.replace(/&quot/g, '')
+        let receitasSemPV = receitasSemEspaco.replace(/;/g, '')
+        let regexId = new RegExp(/(:?id:)(\w*)(:?,nome)/g)
+        let regexNome = new RegExp(/(:?nome:)(.*)(:?,modo)/g)
+        
+        let receita = '{{receitaPorDia.receita}}'
+
+        let nomeReceita = [];
+        let idReceita = [];
+        let receitaId = ''
+        let receitaNome = ''
+        
+        while(receitaId = regexId.exec(receitasSemPV)){
+          idReceita.push(receitaId[2])
+        }
+
+        while(receitaNome = regexNome.exec(receitasSemPV)){
+          nomeReceita.push(receitaNome[2])
+        }
+
+        for(let i=0; i< idReceita.length; i++){
+            let itemSelect = document.createElement("OPTION");
+
+            itemSelect.selected = false;
+            itemSelect.value = idReceita[i];
+            itemSelect.text = nomeReceita[i]; 
+
+            if(idReceita[i] == receita){
+              itemSelect.selected = true;
+            }
+
+            $select[0].appendChild(itemSelect);
+        }
+      } #}
+    {# })() #}
+  {# </script> #}
+{% endblock%} 

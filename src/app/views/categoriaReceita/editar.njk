@@ -1,0 +1,29 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+  <div class="row"> 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">  
+      <div class="cadastro">
+        <form action="/categoriaReceita/editar/{{ categoriaReceita._id }}" method="POST">
+          {# {% include "_partials/flash.njk" %} #}
+          {# <input type="hidden" name="_id"> #}
+
+          <h3>Editar Categoria de Receita</h3>
+          <br>
+          
+          <div class="row">
+            <div class="col-md-8 col-lg-6">
+              <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <input type="text" name="categoria" value="{{ categoriaReceita.categoria }}" class="form-control" maxlength="50" required> 
+              </div>
+              {% include "_partials/flash.njk" %}
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary col-xl-2 col-lg-3 col-md-4 mt-2">Confirmar</button>
+          <a class="btn btn-primary btnVoltar col-xl-2 col-lg-3 col-md-4 mt-2" href="/categoriaReceita/listar" role="button">Voltar</a>
+        </form>
+      </div>
+    </main>
+  </div>   
+{% endblock%} 

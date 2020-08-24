@@ -1,0 +1,436 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: 0;
+  transition: all 0.3s;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+body {
+  /* font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px; */
+  text-rendering: optimizelegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  font-size: .875rem;
+}
+
+.login{
+  width: 60%;
+  position: relative;
+  top: 50%;
+  transform: translateY(60%);
+}
+
+/* Alex */
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%; 
+  height: 30px;
+  background-color: #FF6347;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
+
+.footer {
+  /* position:absolute;
+  bottom:0; */
+  margin-top: 20px;
+  width: 100%; 
+  height: 30px;
+  background-color: #FF6347;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
+
+footer i{
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.cadastro,
+.listagem,
+.dicas{
+  margin-left: 270px;
+  margin-top: 10px;
+}
+
+.listagem2{
+  margin-left: 285px;
+  margin-top: 10px;
+}
+
+.cadastroLogin{
+  margin-left: 100px;
+  margin-top: 100px;
+}
+
+.cadastroLogin .conteudo {
+  float:left;
+  width:40%;
+  height:80%;
+  margin-top:10px;
+  margin-bottom:20px;
+}
+
+.cadastroLogin .apoio {
+  float:right;
+  width:60%;
+  height:80%;
+  margin-top:10px;
+}
+
+.cadastroLogin .apoio .imgLogin{
+  float: left;
+}
+
+.dashboard{
+  /*Full HD*/
+  margin-left: -100px; 
+  /*HD*/
+  /* margin-left: 50px;  */
+  /* margin-top: 10px; */
+}
+
+.GraficosDashboard{
+  display: block;
+}
+
+.CardsDashboad{
+  clear: both;
+}
+
+.bgCardHeader{
+  color: #333!important;
+}
+
+.bgCards{
+  background-color: #FF6347 !important;
+}
+
+/* #myChart1{
+  width: 500px !important;
+  height: 400px !important;
+  float: left;
+  display: block;
+}
+
+#myChart2{
+  width: 500px !important;
+  height: 400px !important;
+  float: right;
+  display: block;
+} */
+
+#header{
+  /* background-color: FF6347# !important; */
+  background-color: #333 !important;
+  margin: 0 !important;
+}
+
+/* .dropdown-menu a:hover{
+  background-color: #FF6347
+} */
+
+.btn-pesquisa{
+  color: #fff !important;
+  font-weight: bold;
+  /* background-color: #FFD700 !important; */
+}
+
+.container h1,h2{
+  color: #FF6347;
+}
+
+.cadastro button,
+.card-footer a{
+  color: #fff !important;
+  background-color: #FF6347 !important;
+  border-color: #fff
+}
+
+.cadastro button:hover{
+  background-color: #FF7F50 !important;
+  border-color: #fff
+}
+
+.main-wrapper {
+  height: 100%;
+  padding-top: 30px;
+  margin: 0 auto;
+  display: block;
+}
+
+.alert {
+  width: 100%;
+  padding: 8px 15px;
+  border-radius: 4px;
+  background: #f38888;
+  border: 1px solid #de6d6d;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 10px;
+}
+
+.alert-success {
+  background: #adf7b2;
+  border-color: #96e89c;
+}
+
+/* Alex */
+.scheduleFilter{
+  max-width: none;
+  float: none;
+  border-radius: 5px;
+  margin-top: -40px; 
+  margin-bottom: 20px; 
+}
+
+.scheduleFilter form{
+  width: 100%;
+}
+
+.scheduleFlatpickr input {    
+  height: 40px;
+  padding: 0 5px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #444;
+  margin: 5px 10px;
+} 
+
+.scheduleFlatpickr{
+  margin: 0px 5px;
+}
+
+.scheduleFlatpickr label[for="dtInicial"] {
+  font-weight: bold;
+}
+
+.scheduleFlatpickr label[for="dtFinal"] {
+  font-weight: bold;
+}
+
+.scheduleFilter button:hover {
+   background: #f38888; 
+
+}
+
+.scheduleFilter form{
+  /* display: flex; */
+}
+
+.formReceita{
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.ErrorField{
+  width: 100%;
+  padding: 8px 15px;
+  border-radius: 4px;
+  background: #f38888;
+  border: 1px solid #de6d6d;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 10px;
+}
+
+.error{
+  margin: 0px;
+  padding: 0;
+  text-align: center;
+}
+
+.verticalCenter{
+  margin-top: 20%; 
+  width: 100%;
+}
+
+.btnInicio{
+  text-align: center !important;
+  vertical-align: middle !important;
+  border-radius: 0.25rem !important;
+  width: 250px !important;
+  height: 70px !important; 
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  color: #fff !important;
+  background-color: #FF6347 !important;
+  border-color: #FF6347 !important; 
+  /* background-color: #fed136;
+  border-color: #fed136;  */
+  /* font-weight: bold !important; */
+}
+
+.btnInicio:hover{
+  color: #fff !important;
+  background-color: #FA8072 !important;
+  border-color: #FA8072 !important; 
+  /* background-color: #fed136;
+  border-color: #fed136;  */
+} 
+
+.bodyStart{
+  /* background-color: rgba(255,0,0,0.5);  */
+  background-image: url("/assets/img/start_01.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%; /* 100%  300 pixels de largura e altura automática */
+  overflow-y:hidden;
+}
+
+#ParagrafoInicio{
+  margin-top: 50px;
+  margin-left: 20%;
+  margin-right: 20%;
+  font-size: 48px;
+  font-weight: bold;
+  /* background-color: rgba(255,255,255,0.5); */
+  color: #fed136;
+  text-align: center
+}
+
+.bgLogin{
+  /* background-color: #FA8072; */
+  background-color: #fff;
+  /* margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: 0;
+  transition: all 0.3s; */
+
+}
+
+.imgLogin{
+  display: table; 
+  margin: 0 auto;
+}
+
+.btnLogin{
+  color: #fff;
+  background-color: #FA8072;
+  border-color: #FA8072; 
+}
+
+#colEdit, #colDelete{
+  width: 50px;
+}
+
+#colEdit::after, #colDelete::after{
+  display: none;
+}
+
+#colEdit::before, #colDelete::before{
+  display: none;
+}
+
+#TituloListagem{
+  display: block;
+  text-align: center;
+}
+
+.tirarNegrito{
+  font-weight: 200
+}
+
+.btnDicas{
+  text-decoration: none;
+  color: #000 !important;
+}
+
+.btnDicas:hover {
+  text-decoration: none !important;;
+  color: #000 !important;
+}
+
+.CardsDashboad div div #Card1Dashboard{
+  background-color: #FF0A28 !important;
+}
+
+.CardsDashboad div div #Card2Dashboard{
+  background-color: #00CED1 !important;
+}
+
+.CardsDashboad div div #Card3Dashboard{
+  background-color: #1E90FF !important;
+} 
+
+.CardsDashboad div div #Card4Dashboard{
+  background-color: #FFA10B !important;
+}
+
+.CardsDashboad div div #Card1Dashboard #ValueCard1DashBoard,
+.CardsDashboad div div #Card2Dashboard #ValueCard2DashBoard,
+.CardsDashboad div div #Card3Dashboard #ValueCard3DashBoard,
+.CardsDashboad div div #Card4Dashboard #ValueCard4DashBoard{
+  font-size: 20px !important;
+}
+
+#btnAdicionar,
+.cadastro > form > .btnVoltar{
+  border: none !important;
+}
+
+
+.cadastro > form > .btnVoltar{
+  background-color:#A9A9A9 !important ;
+}
+
+.cadastro > form > .btnVoltar:hover{
+  border: none !important;
+  background-color:#C0C0C0 !important;
+}
+/* 
+.card > .receita {
+  height: 300px !important;
+  width: 100%;
+} */
+
+@media screen and (max-width: 2500px) {
+  .card > .receita {
+    height: 275px !important;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .card > .receita {
+    height: 200px !important;
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 1200px) {
+  .card > .receita {
+    height: 250px !important;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .card > .receita {
+    height: 100px !important;
+    width: 100%;
+  }
+}
+
+
+
+
+
+

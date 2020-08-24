@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{# Head #}
+{% include "_partials/head.njk" %}
+{# {% include "_partials/footer.njk" %} #}
+
+<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2" id="header">
+    <a class="navbar-brand" href="/app/dashboard">
+      <img src="/assets/img/logo2.png" width="45" height="45" class="d-inline-block align-top" alt="">
+    </a>
+    <a class="navbar-brand" href="/app/dashboard">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+            <i class="fas fa-book"></i>
+            Cadastros
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/categoriaReceita/cadastro">Categoria de Receita</a>
+            <a class="dropdown-item" href="/tipoImposto/cadastro">Tipo de Imposto/Despesa</a>
+            <a class="dropdown-item" href="/insumo/cadastro">Insumo</a>
+            <a class="dropdown-item" href="/compra/cadastro">Compra</a>
+            <a class="dropdown-item" href="/imposto/cadastro">Imposto/Despesa</a>
+            <a class="dropdown-item" href="/receita/cadastro">Receita</a>
+            <a class="dropdown-item" href="/produto/cadastro">Produto</a>
+            <a class="dropdown-item" href="/receitaPorDia/cadastro">Receita Por Dia</a>
+            <a class="dropdown-item" href="/venda/cadastro">Venda</a>
+            <a class="dropdown-item" href="/usuario/cadastro">Usuário</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-book-open"></i>
+            Consultas/Edição
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/categoriaReceita/listar">Categoria de Receita</a>
+            <a class="dropdown-item" href="/tipoImposto/listar">Tipo de Imposto/Despesa</a>
+            <a class="dropdown-item" href="/insumo/listar">Insumo</a>
+            <a class="dropdown-item" href="/compra/listar">Compra</a>
+            <a class="dropdown-item" href="/imposto/listar">Imposto/Despesa</a>
+            <a class="dropdown-item" href="/receita/listar">Receita</a>
+            <a class="dropdown-item" href="/produto/listar">Produto</a>
+            <a class="dropdown-item" href="/receitaPorDia/listar">Receita Por Dia</a>
+            <a class="dropdown-item" href="/venda/listar">Venda</a>
+            <a class="dropdown-item" href="/estoque/listar">Estoque</a>
+            <a class="dropdown-item" href="/receita/historicoPreco">Histório de Preços Receita</a>
+            <a class="dropdown-item" href="/receita/mediaPreco">Média de Preços Receita</a>
+            <a class="dropdown-item" href="/usuario/listar">Usuário</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+           <i class="fas fa-info"></i>
+            Dicas de Uso
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/dicas/instrucoes">Instruções de Uso</a>
+            {# <a class="dropdown-item" href="/dicas/fatorCorrecao">Fator de Correção Ingredientes</a> #}
+          </div>
+        </li>
+      </ul>
+      {# <form class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto">
+            <a class="nav-link" href="/usuario/login">
+              Login
+              <i class="fas fa-address-card"></i>
+            </a>
+            <a class="nav-link" href="/usuario/cadastro">
+              Registro
+              <i class="fas fa-user-lock"></i>
+            </a>
+        <ul>
+      </form> #}
+      <form class="form-inline my-2 my-lg-0" id="formExit">
+        <ul class="navbar-nav mr-auto">
+            <a class="nav-link" href="/app/start">
+              Sair
+              <i class="fas fa-sign-out-alt"></i>
+            </a>
+            {# <a class="nav-link" href="/usuario/cadastro">
+              Registro
+              <i class="fas fa-user-lock"></i>
+            </a> #}
+        <ul>
+      </form>
+    </div>
+  </nav>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      {% block body %}
+        
+      {% endblock %}
+
+    </div>
+  </div> 
+
+  <footer class="sticky-footer">
+    <div class="container">
+        <div class="text-center">
+            <small>Copyright Seu site</small>
+        </div>
+    </div>
+  </footer> 
+</body>
+
+<script>
+  {# $data = document.getElementById('example')
+  if ($data) {
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+  }   #}
+</script>
+
+</html>

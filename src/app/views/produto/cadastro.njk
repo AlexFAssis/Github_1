@@ -1,0 +1,57 @@
+{% extends "_layouts/default.njk" %} 
+
+{% block body %}
+  <div class="row"> 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">  
+        <div class="cadastro">
+          <h3>Cadastro de Produto</h3>
+          <br>
+          <form action="/produto" method="POST">
+            {# {% include "_partials/flash.njk" %} #}
+            {# <input type="hidden" name="_id"> #}
+            <div class="row">
+              <div class="col-md-8 col-lg-6">
+                <div class="form-group">
+                  <label for="receita">Receita</label>
+                  <select name="receita" class="selectReceitas form-control">
+                    {% for receita in receitas%}
+                      <option value="{{ receita._id }}" name="receita"> {{ receita.nome }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <div class="form-group">
+                  <label for="preco">Preço</label>
+                    <div class="input-group">
+                    <div class="input-group-prepend">    
+                      <span class="input-group-text" id="input1">R$</span>
+                    </div>
+                    <input type="text" id="preco" class="form-control" name="preco" data-thousands="." data-decimal=","  min="0.01" required/>
+                    {# <input type="tel" name="preco" step="0.01" value ='0' id="preco" class="form-control" min="1" pattern="([\d]{1,}),[\d]{2}$" required> #}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8 col-lg-6">
+                <div class="form-group">
+                  {% include "_partials/flash.njk" %}
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary col-xl-2 col-lg-3 col-md-4 mt-2">Criar</button>
+          </form>
+        </div>
+      </main>
+  </div> 
+
+  <script>
+  $(function () {
+    $('#preco').maskMoney();
+  })
+</script>
+{% endblock%}
+
