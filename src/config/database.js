@@ -10,8 +10,6 @@ module.exports = function () {
     uri = 'mongodb://localhost:27017/ProjetoTG'
   }
 
-  uri
-
   mongoose.connect(uri, { useNewUrlParser: true });
   mongoose.set('useFindAndModify', false); //DeprecationWarning no método findOneAndUpdate
   mongoose.set('useCreateIndex', true)//collection.ensureIndex is deprecated. Use createIndexes instead
